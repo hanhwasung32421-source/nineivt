@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 | 공지사항 작성</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .admin-wrap { padding: 120px 0 80px; }
+    .admin-card { background:#fff; border:1px solid rgba(12,17,26,.08); border-radius:24px; box-shadow: var(--shadow-soft); padding: 26px; }
+    .admin-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .admin-grid.full { grid-template-columns: 1fr; }
+    label { display:block; font-weight: 800; margin-bottom: 8px; }
+    input, textarea { width:100%; border-radius: 16px; border:1px solid rgba(12,17,26,.12); padding: 12px 14px; font: inherit; }
+    textarea { min-height: 140px; resize: vertical; }
+    .helper { color: var(--text-soft); font-size: 14px; margin-top: 6px; }
+    .admin-actions { display:flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .status { margin-top: 14px; color: var(--text-soft); }
+    .list { margin-top: 20px; }
+    .list ul { list-style:none; padding:0; margin:0; display:grid; gap: 10px; }
+    .list li { padding: 14px; border-radius: 18px; background: #f8fafc; border:1px solid rgba(12,17,26,.08); }
+    .list strong { display:block; }
+    .list small { color: var(--text-soft); }
+    @media (max-width: 900px) { .admin-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="../index.html" aria-label="나인투자 홈">
+        <span class="brand__mark">NI</span>
+        <span class="brand__name">
+          <small>PREMIUM INVESTMENT GROUP</small>
+          <strong>나인투자</strong>
+        </span>
+      </a>
+      <div class="header-cta">
+        <a class="pill pill--ghost" href="../pages/news/index.html">공지사항</a>
+        <a class="pill pill--ghost" href="../index.html">홈으로</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="모바일 메뉴 열기"><span></span></button>
+    </div>
+  </header>
+
+  <main class="admin-wrap">
+    <div class="container">
+      <div class="admin-card">
+        <h2 style="margin:0 0 10px;">관리자 전용 공지 작성</h2>
+        <p style="margin:0; color:var(--text-soft);">회원가입 없이, 관리자 키를 아는 사람만 공지를 작성할 수 있습니다.</p>
+
+        <div class="content-block" style="padding-top: 28px;">
+          <div class="admin-grid full">
+            <div>
+              <label for="adminKey">관리자 키</label>
+              <input id="adminKey" type="password" placeholder="Vercel 환경변수 ADMIN_KEY 값" autocomplete="off" />
+              <div class="helper">이 키는 브라우저에 저장되지 않습니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block" style="padding-top: 28px;">
+          <h2 style="margin:0 0 12px;">상단 고정 NOTICE 문구</h2>
+          <div class="admin-grid full">
+            <div>
+              <label for="pinnedBody">NOTICE 내용</label>
+              <textarea id="pinnedBody"></textarea>
+              <div class="helper">메인 화면과 공지사항 페이지 상단에 동일하게 노출됩니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block" style="padding-top: 28px;">
+          <h2 style="margin:0 0 12px;">공지 추가</h2>
+          <div class="admin-grid">
+            <div>
+              <label for="itemTitle">제목</label>
+              <input id="itemTitle" type="text" placeholder="예) 운영 안내" />
+            </div>
+            <div>
+              <label for="itemDate">날짜</label>
+              <input id="itemDate" type="date" />
+            </div>
+          </div>
+          <div class="admin-grid full" style="margin-top: 14px;">
+            <div>
+              <label for="itemContent">내용</label>
+              <textarea id="itemContent" placeholder="첫 줄은 메인 목록에 요약으로 표시됩니다."></textarea>
+            </div>
+          </div>
+
+          <div class="admin-actions">
+            <button class="pill pill--ghost" type="button" id="btnLoad">불러오기</button>
+            <button class="pill pill--ghost" type="button" id="btnAdd">공지 추가</button>
+            <button class="pill pill--ghost" type="button" id="btnSave">저장(배포)</button>
+          </div>
+          <div class="status" id="status">대기 중</div>
+        </div>
+
+        <div class="list" aria-label="공지 목록 미리보기">
+          <h2 style="margin:0 0 12px;">현재 공지 목록</h2>
+          <ul id="previewList"></ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/js/site.js"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $('status');
+    const listEl = $('previewList');
+    const state = { data: null };
+
+    const setStatus = (msg) => { statusEl.textContent = msg; };
+
+    const renderList = () => {
+      const items = Array.isArray(state.data?.items) ? state.data.items : [];
+      listEl.innerHTML = items
+        .slice(0, 30)
+        .map((it) => {
+          const date = (it.date || '').toString();
+          const title = (it.title || '').toString();
+          return `<li><strong>${title}</strong><small>${date}</small></li>`;
+        })
+        .join('');
+    };
+
+    const load = async () => {
+      setStatus('불러오는 중...');
+      const res = await fetch('/api/notices', { cache: 'no-store' });
+      if (!res.ok) throw new Error('공지 데이터를 불러오지 못했습니다.');
+      state.data = await res.json();
+      $('pinnedBody').value = state.data?.pinnedNotice?.body ?? '';
+      renderList();
+      setStatus('불러오기 완료');
+    };
+
+    const add = () => {
+      if (!state.data) state.data = { pinnedNotice: { title: 'NOTICE', updatedAt: '', body: '' }, items: [] };
+      if (!Array.isArray(state.data.items)) state.data.items = [];
+
+      const title = $('itemTitle').value.trim();
+      const date = $('itemDate').value || new Date().toISOString().slice(0, 10);
+      const content = $('itemContent').value.trim();
+
+      if (!title || !content) {
+        setStatus('제목/내용을 입력하세요.');
+        return;
+      }
+
+      state.data.items.unshift({
+        id: `notice-${Date.now()}`,
+        date,
+        title,
+        content
+      });
+
+      $('itemTitle').value = '';
+      $('itemContent').value = '';
+      renderList();
+      setStatus('공지 추가됨(아직 저장 전)');
+    };
+
+    const save = async () => {
+      const key = $('adminKey').value.trim();
+      if (!key) {
+        setStatus('관리자 키를 입력하세요.');
+        return;
+      }
+      if (!state.data) {
+        setStatus('저장할 데이터가 없습니다. 먼저 불러오기 하세요.');
+        return;
+      }
+
+      state.data.pinnedNotice = state.data.pinnedNotice || { title: 'NOTICE' };
+      state.data.pinnedNotice.title = 'NOTICE';
+      state.data.pinnedNotice.updatedAt = new Date().toISOString().slice(0, 10);
+      state.data.pinnedNotice.body = $('pinnedBody').value;
+
+      setStatus('저장(배포) 요청 중...');
+      const res = await fetch('/api/notices', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Key': key
+        },
+        body: JSON.stringify(state.data)
+      });
+
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(t);
+      }
+      setStatus('저장 요청 완료. GitHub 커밋 후 Vercel이 자동으로 재배포됩니다.');
+    };
+
+    $('btnLoad').addEventListener('click', () => load().catch((e) => setStatus(`오류: ${e.message}`)));
+    $('btnAdd').addEventListener('click', add);
+    $('btnSave').addEventListener('click', () => save().catch((e) => setStatus(`오류: ${e.message}`)));
+
+    // 최초 로드
+    load().catch(() => setStatus('불러오기를 눌러 공지 데이터를 가져오세요.'));
+  </script>
+</body>
+</html>
+

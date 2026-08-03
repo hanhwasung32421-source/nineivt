@@ -408,6 +408,71 @@ button {
   background: var(--primary);
 }
 
+.notice-float {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  padding-top: 96px; /* fixed header 높이 고려 */
+  pointer-events: none;
+}
+
+.notice-float__inner {
+  pointer-events: auto;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 17, 29, 0.72);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.notice-float__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.notice-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #fff;
+  background: #e5484d;
+}
+
+.notice-float__head strong {
+  letter-spacing: 0.18em;
+  font-size: 12px;
+}
+
+.notice-float__body {
+  padding: 16px 18px 18px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.notice-float__body p {
+  margin: 0 0 10px;
+}
+
+.notice-float__body p:last-child {
+  margin-bottom: 0;
+}
+
+.notice-float__em {
+  color: #ffd59e;
+  font-weight: 800;
+}
+
 .section {
   padding: 110px 0;
 }

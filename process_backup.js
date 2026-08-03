@@ -116,3 +116,30 @@ window.__TRAE_PROCESS_BACKUP__.push({
     "pages/"
   ]
 });
+window.__TRAE_PROCESS_BACKUP__.push({
+  timestamp: "2026-08-03",
+  task: "공지사항 고정 NOTICE + 관리자만 작성 기능",
+  process: [
+    "사용자 제공 이미지의 공지 문구를 텍스트로 반영",
+    "문구 중 '강사는 ...' 부분을 '회원은 본 게시판에 글을 쓸 수 없습니다'로 수정",
+    "data/notices.json을 기준으로 메인/공지사항 페이지에 NOTICE와 목록을 동적 로드",
+    "관리자 페이지(/admin)에서 관리자 키로 공지 추가/저장 가능하도록 구성",
+    "Vercel API(/api/notices)에서 관리자 요청만 GitHub 커밋으로 반영되게 구현"
+  ],
+  files: [
+    "data/notices.json",
+    "assets/js/notices.js",
+    "api/notices.js",
+    "admin/index.html",
+    "index.html",
+    "pages/news/index.html",
+    "VERCEL_ENV.md"
+  ]
+});
+window.__TRAE_PROCESS_BACKUP__.push({
+  timestamp: "2026-08-03",
+  task: "회사명 변경(나인투자)",
+  process: [
+    "전체 페이지 회사명/푸터/브랜드 마크를 나인투자로 변경"
+  ]
+});

@@ -172,3 +172,44 @@ window.__TRAE_CONVERSATION_BACKUP__.push({
     ]
   }
 });
+window.__TRAE_CONVERSATION_BACKUP__.push({
+  timestamp: "2026-08-03",
+  taskType: "notice_admin_feature",
+  userRequest: {
+    request: "이미지 공지 문구를 메인에 노출 + '강사' 문구를 '회원은 글을 쓸 수 없다'로 변경 + 실제 기능도 어드민만 글 작성",
+    membership: "회원가입 불필요"
+  },
+  assistantWork: {
+    result: "completed",
+    changes: [
+      "공지 데이터 파일(data/notices.json) 추가",
+      "메인 히어로 상단에 NOTICE 오버레이 추가(동적 로드)",
+      "공지사항 페이지에서 동일 문구 및 공지 목록 노출",
+      "관리자 페이지(/admin) 추가: 관리자 키로만 공지 저장 가능",
+      "Vercel Serverless Function(/api/notices) 추가: 관리자 요청만 GitHub에 커밋"
+    ],
+    filesTouched: [
+      "index.html",
+      "pages/news/index.html",
+      "data/notices.json",
+      "assets/js/notices.js",
+      "api/notices.js",
+      "admin/index.html",
+      "VERCEL_ENV.md"
+    ]
+  }
+});
+window.__TRAE_CONVERSATION_BACKUP__.push({
+  timestamp: "2026-08-03",
+  taskType: "company_rename",
+  userRequest: {
+    request: "회사상호를 나인투자로 변경"
+  },
+  assistantWork: {
+    result: "completed",
+    changes: [
+      "전체 페이지의 회사명/푸터/이메일 표기를 나인투자로 변경",
+      "브랜드 마크를 NI로 변경"
+    ]
+  }
+});

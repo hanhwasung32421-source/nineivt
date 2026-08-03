@@ -176,3 +176,23 @@ window.__TRAE_PROCESS_BACKUP__.push({
     "admin/index.html"
   ]
 });
+window.__TRAE_PROCESS_BACKUP__.push({
+  timestamp: "2026-08-03",
+  task: "로고 교체(n-logo-core)",
+  process: [
+    "새로 추가된 n-logo-core.svg 파일 확인",
+    "기존 로고 참조를 전 페이지에서 n-logo-core.svg로 교체",
+    "메인/내부/관리자 페이지 헤더 로고를 동일 SVG로 통일"
+  ],
+  files: [
+    "n-logo-core.svg",
+    "index.html",
+    "pages/about/index.html",
+    "pages/business/index.html",
+    "pages/service/index.html",
+    "pages/location/index.html",
+    "pages/news/index.html",
+    "pages/reviews/index.html",
+    "admin/index.html"
+  ]
+});

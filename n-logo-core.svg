@@ -1,0 +1,5 @@
+<svg width="512" height="512" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Core N logo">
+  <rect x="18" y="18" width="84" height="84" rx="24" fill="#F4F8FF" stroke="#D6E5FF" stroke-width="2"/>
+  <path d="M36 82V38H48L74 70V38H84V82H72L46 49V82H36Z" fill="#103A8C"/>
+  <circle cx="90" cy="30" r="8" fill="#4CA0FF"/>
+</svg>

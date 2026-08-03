@@ -278,3 +278,28 @@ window.__TRAE_CONVERSATION_BACKUP__.push({
     ]
   }
 });
+window.__TRAE_CONVERSATION_BACKUP__.push({
+  timestamp: "2026-08-03",
+  taskType: "logo_replace_core",
+  userRequest: {
+    request: "n-logo-core 파일을 홈페이지 전체 로고로 적용"
+  },
+  assistantWork: {
+    result: "completed",
+    changes: [
+      "기존 malon-logo-icon.svg 참조를 모두 n-logo-core.svg로 교체",
+      "메인/내부/관리자 페이지 헤더 로고를 동일 SVG로 통일"
+    ],
+    filesTouched: [
+      "n-logo-core.svg",
+      "index.html",
+      "pages/about/index.html",
+      "pages/business/index.html",
+      "pages/service/index.html",
+      "pages/location/index.html",
+      "pages/news/index.html",
+      "pages/reviews/index.html",
+      "admin/index.html"
+    ]
+  }
+});

@@ -213,3 +213,23 @@ window.__TRAE_CONVERSATION_BACKUP__.push({
     ]
   }
 });
+window.__TRAE_CONVERSATION_BACKUP__.push({
+  timestamp: "2026-08-03",
+  taskType: "notice_copy_update",
+  userRequest: {
+    request: "본 게시판에 쓸수없다 → 본 홈페이지에 글을 쓸 수 없다로 변경"
+  },
+  assistantWork: {
+    result: "completed",
+    changes: [
+      "공지 고정 문구를 '본 홈페이지' 표현으로 변경",
+      "강조 표시 규칙도 새 문구에 맞게 갱신"
+    ],
+    filesTouched: [
+      "data/notices.json",
+      "assets/js/notices.js",
+      "process_backup.js",
+      "conversation_backup.js"
+    ]
+  }
+});

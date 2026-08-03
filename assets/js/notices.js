@@ -20,7 +20,7 @@
       .map((line) => line.trim())
       .filter(Boolean)
       .map((line) => {
-        const isEm = /회원은.*글을\s*쓸\s*수\s*없습니다/.test(line);
+        const isEm = /회원은.*글을\s*쓸\s*수\s*없습니다/.test(line) || /회원은.*본\s*홈페이지에\s*글을\s*쓸\s*수\s*없습니다/.test(line);
         const cls = isEm ? ' class="notice-float__em"' : '';
         return `<p${cls}>${escapeHtml(line)}</p>`;
       })

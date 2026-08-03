@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">말론투자 로고 아이콘</title>
+  <desc id="desc">깔끔하고 세련된 M 모노그램 로고. 차콜 라인과 빨간 포인트 대각선으로 구성됨.</desc>
+  <g>
+    <path d="M116 388V136" stroke="#141414" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M116 136L256 278" stroke="#141414" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M256 278L396 136" stroke="#C91F2E" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M396 136V388" stroke="#141414" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

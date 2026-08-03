@@ -155,3 +155,24 @@ window.__TRAE_PROCESS_BACKUP__.push({
     "assets/js/site.js"
   ]
 });
+window.__TRAE_PROCESS_BACKUP__.push({
+  timestamp: "2026-08-03",
+  task: "로고 아이콘 적용",
+  process: [
+    "사용자가 추가한 malon-logo-icon.svg 파일을 사이트 메인 로고로 적용",
+    "모든 페이지 헤더의 브랜드 마크를 SVG 이미지로 교체",
+    "공통 CSS에서 로고 마크 영역을 이미지 표시에 맞게 조정"
+  ],
+  files: [
+    "malon-logo-icon.svg",
+    "assets/css/style.css",
+    "index.html",
+    "pages/about/index.html",
+    "pages/business/index.html",
+    "pages/service/index.html",
+    "pages/location/index.html",
+    "pages/news/index.html",
+    "pages/reviews/index.html",
+    "admin/index.html"
+  ]
+});

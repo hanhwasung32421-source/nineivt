@@ -98,3 +98,21 @@ window.__TRAE_PROCESS_BACKUP__.push({
     "pages/reviews/index.html"
   ]
 });
+window.__TRAE_PROCESS_BACKUP__.push({
+  timestamp: "2026-08-03",
+  task: "Git 원격 저장소 설정 및 푸시",
+  process: [
+    "현재 폴더가 상위 저장소 하위 폴더임을 확인",
+    "Vercel 배포 충돌 방지를 위해 현재 폴더를 독립 Git 저장소로 초기화",
+    "main 브랜치 생성 후 전체 사이트 파일 커밋",
+    "origin을 firsthome.git으로 연결",
+    "GitHub 원격 저장소로 main 브랜치 푸시"
+  ],
+  files: [
+    "conversation_backup.js",
+    "process_backup.js",
+    "index.html",
+    "assets/",
+    "pages/"
+  ]
+});

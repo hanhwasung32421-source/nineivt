@@ -143,3 +143,15 @@ window.__TRAE_PROCESS_BACKUP__.push({
     "전체 페이지 회사명/푸터/브랜드 마크를 나인투자로 변경"
   ]
 });
+window.__TRAE_PROCESS_BACKUP__.push({
+  timestamp: "2026-08-03",
+  task: "특정 표기 문자열 제거",
+  process: [
+    "공지 렌더링 로직에서 특정 표기 문자열 자동 제거 처리 추가",
+    "공통 스크립트에서 모든 화면 텍스트 노드의 특정 표기 문자열 자동 제거 처리 추가"
+  ],
+  files: [
+    "assets/js/notices.js",
+    "assets/js/site.js"
+  ]
+});

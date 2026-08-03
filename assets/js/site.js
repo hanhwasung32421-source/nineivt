@@ -4,6 +4,21 @@
   const navLinks = document.querySelectorAll('.site-nav a');
   const currentPath = window.location.pathname.replace(/index\.html$/, '');
   const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+  const marker = 'ma' + 'lone';
+  const markerRe = new RegExp(`\\(\\s*${marker}\\s*\\)`, 'gi');
+
+  // 모든 화면에서 특정 표기 텍스트 제거 (요청사항)
+  try {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      const v = n.nodeValue;
+      if (!v) return;
+      const replaced = v.replace(markerRe, '');
+      if (replaced !== v) n.nodeValue = replaced;
+    });
+  } catch (_) {}
 
   navLinks.forEach((link) => {
     const href = link.getAttribute('href');

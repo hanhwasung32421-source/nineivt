@@ -3,11 +3,16 @@
   const pinnedTitle = document.querySelector('[data-pinned-title]');
   const pinnedBody = document.querySelector('[data-pinned-body]');
   const listRoot = document.querySelector('[data-notice-list]');
+  const marker = 'ma' + 'lone';
+  const markerRe = new RegExp(`\\(\\s*${marker}\\s*\\)`, 'gi');
 
   if (!noticeRoot && !listRoot) return;
 
+  const sanitizeText = (s) =>
+    String(s ?? '').replace(markerRe, '').replace(/\s{2,}/g, ' ').trim();
+
   const escapeHtml = (s) =>
-    String(s ?? '')
+    sanitizeText(s)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -15,7 +20,7 @@
       .replace(/'/g, '&#039;');
 
   const toParagraphs = (text) =>
-    String(text ?? '')
+    sanitizeText(text)
       .split(/\n+/g)
       .map((line) => line.trim())
       .filter(Boolean)

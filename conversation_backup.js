@@ -233,3 +233,22 @@ window.__TRAE_CONVERSATION_BACKUP__.push({
     ]
   }
 });
+window.__TRAE_CONVERSATION_BACKUP__.push({
+  timestamp: "2026-08-03",
+  taskType: "remove_marker_text",
+  userRequest: {
+    request: "특정 표기 문자열 제거 요청"
+  },
+  assistantWork: {
+    result: "completed",
+    changes: [
+      "공지 렌더링 시 특정 표기 문자열을 자동 제거",
+      "사이트 공통 스크립트에서 모든 텍스트 노드의 특정 표기 문자열 자동 제거"
+    ],
+    filesTouched: [
+      "assets/js/notices.js",
+      "assets/js/site.js",
+      "conversation_backup.js"
+    ]
+  }
+});

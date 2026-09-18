@@ -18,7 +18,7 @@ Vercel 프로젝트 Settings → Environment Variables에 아래를 추가하세
 - `GITHUB_OWNER`
   - 예: `hanhwasung32421-source`
 - `GITHUB_REPO`
-  - 예: `firsthome`
+  - 예: `nineivt`
 - `GITHUB_BRANCH`
   - 예: `main` (기본값 `main`)
 - `GITHUB_FILE_PATH`
